@@ -1,0 +1,99 @@
+/* Full screen background */
+.loginContainer {
+    min-height: 100vh;
+    width: 100%;
+    background: radial-gradient(circle at top, #1f2933, #020617);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+/* Outer box */
+.box {
+    background: rgba(15, 23, 42, 0.85);
+    border-radius: 14px;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 20px 50px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    padding: 2.5rem;
+    width: 420px;
+    max-width: 95%;
+}
+
+/* Inner container */
+.miniContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Login/Register box */
+.loginBox {
+    width: 100%;
+    color: #e5e7eb;
+}
+
+/* Headings */
+.loginBox h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #f8fafc;
+}
+
+/* Inputs */
+.loginBox input {
+    background-color: #020617;
+    color: #e5e7eb;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.loginBox input::placeholder {
+    color: #64748b;
+}
+
+.loginBox input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 1px #6366f1;
+}
+
+/* Submit button spacing */
+.loginBox button[type="submit"] {
+    margin-top: 1rem;
+}
+
+/* Switch login/signup text */
+.loginBox>div:last-child {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+/* Ghost button (signin/signup toggle) */
+.loginBox button[variant="ghost"] {
+    color: #818cf8;
+}
+
+.loginBox button[variant="ghost"]:hover {
+    color: #a5b4fc;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .box {
+        padding: 2rem 1.5rem;
+    }
+
+    .loginBox h1 {
+        font-size: 1.5rem;
+    }
+}
