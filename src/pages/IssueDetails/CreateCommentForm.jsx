@@ -28,17 +28,21 @@ import { useForm } from 'react-hook-form'
 
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { useDispatch } from 'react-redux'
+import { createComment } from '@/Redux/Comment/Action'
 
 
 
 const CreateCommentForm = ({ issueId }) => {
+    const dispatch = useDispatch()
     const form = useForm({
         defaultValues: {
             content: ""
         }
     })
     const onSubmit = (data) => {
-        console.log("create project data", data)
+        dispatch(createComment({ content: data.content, issueId }))
+        console.log("create comment form page", data)
     }
     return (
         <div>

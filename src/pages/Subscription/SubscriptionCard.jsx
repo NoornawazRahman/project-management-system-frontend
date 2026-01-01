@@ -1,8 +1,17 @@
 import { Button } from '@/components/ui/button'
+import { createPayment } from '@/Redux/Payment/Action'
 import { CheckCircledIcon } from '@radix-ui/react-icons'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 const SubscriptionCard = ({ data }) => {
+    const dispatch = useDispatch()
+    const handleUpgrade = () => {
+        dispatch(createPayment({
+            planType: data.planType,
+            jwt: localStorage.getItem("jwt")
+        }))
+    }
     return (
         <div
             className='rounded-xl bg-[#1b1b1b] bg-opacity-20 shadow-[#14173b] 
@@ -17,7 +26,7 @@ const SubscriptionCard = ({ data }) => {
                 data.planType === "ANNUALLY" && <p className='text-green-500'>30% off</p>
             }
 
-            <Button className='w-full'>
+            <Button className='w-full' onClick={handleUpgrade}>
                 {data.buttonName}
             </Button>
             <div>

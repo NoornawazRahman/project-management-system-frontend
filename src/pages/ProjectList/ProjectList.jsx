@@ -5,8 +5,13 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { MagnifyingGlassIcon, MixerHorizontalIcon } from '@radix-ui/react-icons'
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ProjectCard from '../Project/ProjectCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { store } from '@/Redux/Store'
+import { searchProjects } from '@/Redux/Project/Action'
+import { fetchProjects } from '../../Redux/Project/Action';
+
 
 
 export const tags = [
@@ -16,13 +21,35 @@ export const tags = [
 const ProjectList = () => {
     const [keyword, setKeyword] = useState("");
 
-    const handleFilterChange = (section, value) => {
-        console.log("section: " + section + ", value: " + value)
+    const { project } = useSelector(store => store)
+
+    const dispatch = useDispatch()
+
+    const handleFilterCategory = (value) => {
+        if (value === "all") {
+            dispatch(fetchProjects({}))
+        } else {
+            dispatch(fetchProjects({ category: value }))
+        }
+    }
+
+    const handleFilterTags = (value) => {
+        if (value === "all") {
+            dispatch(fetchProjects({}))
+        } else {
+            dispatch(fetchProjects({ tag: value }))
+        }
     }
 
     const handleSearchChange = (e) => {
         setKeyword(e.target.value)
+        dispatch(searchProjects(e.target.value))
     }
+
+
+
+    console.log(`project store`, project);
+
     return (
         <>
             <div className='relative px-5 lg:px-0 lg:flex gap-5 justify-center py-5'>
@@ -42,7 +69,11 @@ const ProjectList = () => {
                                         Category
                                     </h1>
                                     <div className='pt-5'>
-                                        <RadioGroup className='space-y-3 pt-5' defaultValue="all" onValueChange={(value) => handleFilterChange("category", value)}>
+                                        <RadioGroup
+                                            className='space-y-3 pt-5'
+                                            defaultValue="all"
+                                            onValueChange={(value) => handleFilterCategory(value)}
+                                        >
                                             <div className='flex items-center gap-2'>
                                                 <RadioGroupItem value='all' id='r1' />
                                                 <Label htmlFor="r1">All</Label>
@@ -68,7 +99,11 @@ const ProjectList = () => {
                                         Tag
                                     </h1>
                                     <div className='pt-5'>
-                                        <RadioGroup className='space-y-3 pt-5' defaultValue="all" onValueChange={(value) => handleFilterChange("tag", value)}>
+                                        <RadioGroup
+                                            className='space-y-3 pt-5'
+                                            defaultValue="all"
+                                            onValueChange={(value) => handleFilterTags(value)}
+                                        >
                                             {
                                                 tags.map((item) =>
                                                     <div key={item} className='flex items-center gap-2 '>
@@ -102,9 +137,9 @@ const ProjectList = () => {
                         <div className='space-y-5 min-h-[74vh]'>
                             {
                                 keyword ?
-                                    [1, 1, 1].map((item) => <ProjectCard key={item} />)
+                                    project.searchProjects?.map((item) => <ProjectCard key={item.id} item={item} />)
                                     :
-                                    [1, 1, 1, 1, 1, 1, 1].map((item) => <ProjectCard key={item} />)
+                                    project.projects?.map((item) => <ProjectCard key={item.id} item={item} />)
                             }
                         </div>
                     </div>

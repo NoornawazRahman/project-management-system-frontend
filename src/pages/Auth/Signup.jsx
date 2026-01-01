@@ -23,12 +23,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-import React from 'react'
+import { register } from '@/Redux/Auth/Action'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
-import { Cross1Icon } from '@radix-ui/react-icons'
 
 const Signup = () => {
+    const dispatch = useDispatch()
     const form = useForm({
         defaultValues: {
             email: "",
@@ -37,9 +38,11 @@ const Signup = () => {
         }
     })
     const onSubmit = (data) => {
-        console.log("create project data", data)
+        dispatch(register(data))
+        console.log("signup page", data)
     }
     return (
+
         <div className='space-y-5'>
             <h1>Register</h1>
             <Form {...form}>

@@ -30,7 +30,7 @@
     // New lines added ->
     "allowJs": true,
     "checkJs": false,
-    // "noImplicitAny": false,
+    "noImplicitAny": false,
     // new lines <---
     // For shadcn ui -->
     "baseUrl": ".",

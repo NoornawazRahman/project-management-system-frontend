@@ -27,10 +27,17 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Cross1Icon } from '@radix-ui/react-icons'
+import { useDispatch } from 'react-redux'
+import { createIssue } from '@/Redux/Issue/Action'
+import { useParams } from 'react-router-dom'
 
 
 
-const CreateIssueForm = () => {
+const CreateIssueForm = ({ status }) => {
+    const dispatch = useDispatch()
+    const { id } = useParams()
+
+
     const form = useForm({
         defaultValues: {
             issueName: "",
@@ -38,7 +45,13 @@ const CreateIssueForm = () => {
         }
     })
     const onSubmit = (data) => {
-        console.log("create project data", data)
+        dispatch(createIssue({
+            title: data.issueName,
+            description: data.description,
+            projectId: id,
+            status: status
+        }))
+        console.log("create issue form page", data)
     }
     return (
         <div>

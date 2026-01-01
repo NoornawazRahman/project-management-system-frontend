@@ -27,15 +27,22 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Cross1Icon } from '@radix-ui/react-icons'
+import { useDispatch, useSelector } from 'react-redux'
+import { inviteToProject } from '@/Redux/Project/Action'
+import { useParams } from 'react-router-dom'
 
 const InviteUserForm = () => {
+    const dispatch = useDispatch()
+    const { id } = useParams()
+
     const form = useForm({
         defaultValues: {
             email: ""
         }
     })
     const onSubmit = (data) => {
-        console.log("create project data", data)
+        dispatch(inviteToProject({ email: data.email, projectId: id }))
+        console.log("InviteUserForm.jsx", data)
     }
     return (
         <div>

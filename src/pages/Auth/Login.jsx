@@ -28,7 +28,15 @@ import { useForm } from 'react-hook-form'
 
 import { Cross1Icon } from '@radix-ui/react-icons'
 
+import { useDispatch } from 'react-redux'
+import { login } from '@/Redux/Auth/Action'
+
+
 const Login = () => {
+
+    const dispatch = useDispatch()
+
+
     const form = useForm({
         defaultValues: {
             email: "",
@@ -36,7 +44,8 @@ const Login = () => {
         }
     })
     const onSubmit = (data) => {
-        console.log("create project data", data)
+        dispatch(login(data))
+        console.log("login page", data)
     }
     return (
         <div className='space-y-5'>
