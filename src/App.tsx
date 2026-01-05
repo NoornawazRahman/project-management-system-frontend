@@ -25,7 +25,7 @@ function App() {
 
     useEffect(() => {
         dispatch(getUser())
-        dispatch(fetchProjects({ category: "", tag: "" }))
+        dispatch(fetchProjects({ category: "all", tag: "all" }))
 
     }, [auth.jwt])
 
