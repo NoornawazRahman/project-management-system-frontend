@@ -6,12 +6,12 @@ import { ACCEPT_INVITATION_REQUEST, ACCEPT_INVITATION_SUCCESS, CREATE_PROJECT_RE
 export const fetchProjects = ({ category, tag }) => async (dispatch) => {
     dispatch({ type: FETCH_PROJECTS_REQUEST })
     try {
-        if (category === "all") {
-            category = undefined;
-        }
-        if (tag === "all") {
-            tag = undefined;
-        }
+        // if (category === "all") {
+        //     category = undefined;
+        // }
+        // if (tag === "all") {
+        //     tag = undefined;
+        // }
         const { data } = await api.get("/api/projects", { params: { category, tag } })
         console.log("all projects", data)
         dispatch({ type: FETCH_PROJECTS_SUCCESS, projects: data })
