@@ -23,10 +23,10 @@ function App() {
     const dispatch = useDispatch<AppDispatch>();
     const auth = useSelector((state: RootState) => state.auth);
 
-
     useEffect(() => {
         dispatch(getUser())
-        dispatch(fetchProjects({}))
+        dispatch(fetchProjects({ category: "", tag: "" }))
+
     }, [auth.jwt])
 
     console.log(auth);
